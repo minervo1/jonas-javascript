@@ -531,7 +531,7 @@ for (let i = 1; i < 4; i++) {
 }
 */
 console.log('---ciclo while---');
-
+/*
 //y aqui tenemos la otra estructura de control, el ciclo while, paa este cicle aun necesitaremos los 3 componentes que usamos en el ciclo FOR, un contador, una condicion y el incremento o decremento del contador, pero  a diferencia de del for en el while solo podremos especificar 1 patrametro, la condicion , el contador se devera declarar fuera del ciclo y el contador deveremos agregarlo dentro del ciclo antes de el termino de este.
 for (let repe = 1; repe <= 5; repe++) {
     console.log(`levantamiento de pesas n° : ${repe}`);
@@ -555,3 +555,4 @@ while (dado !== 6) {
     dado = Math.trunc(Math.random() * 6) + 1;
     if (dado === 6) console.log('el ciclo ha terminado porque salio un 6');
 }
+*/
