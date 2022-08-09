@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color:aquamarine;
+    font-family: Arial;
+    font-size: 15px;
+    padding: 50px;
+}
+h1{
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+h2{
+    text-align: center;
+    margin-bottom: 25px;
+}
+h4{
+    margin-bottom: 20px;
+}
+p{
+    margin-bottom: 20px;
+}
+/*punto para seleccionar las clases*/
+.first{
+    color: red;
+}
+/*asterisco para seleccionar los ID*/
+#your-name{
+    background-color: antiquewhite;
+    border: 5px solid #444;
+    width: 500px;
+    padding: 25px;
+    margin-top: 20px;
+}
+/*de esta manera selecionamos 2 o mas elementos que compartiran las mismas caracteristicas*/
+input,button{
+    padding: 20px;
+    font-size: 15px;
+}
+a{
+    background-color: cadetblue;
+}
+
+/*podemos crear un identificador (id , class) para seleccionar especificamente por ejemple el ancabezado que esta dentro del formulario, pero tambienn podemos seleccionarlo de la siguiente manera.(puede ser cualquier selector)*/
+#your-name h2{
+    color: cadetblue;
+}
+#direccion-img{
+    width: 450px;
+}
