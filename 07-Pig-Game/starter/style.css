@@ -165,3 +165,7 @@ main {
   font-weight: 700;
   color: #c7365f;
 }
+/* creamos la clase hidden con 'display : none', para poder ocultar y mostrar algunos elementos*/
+.hidden {
+  display: none;
+}
