@@ -139,6 +139,7 @@ const grett2 = saludando => nombre => console.log(`${saludando} ${nombre}`);
 grett2('Hola')('juena');
 */
 
+/*
 console.log('!Los metodos de llamada y aplicasion¡');
 
 //veremos como implementar la palabra this de forma manual y para que queriamos hacer esto
@@ -253,3 +254,97 @@ const funciRetor = function () {
 const primeraFuncion = funciRetor();
 console.log(primeraFuncion(0.23, 100));
 console.log(primeraFuncion(0.23, 23));
+
+*/
+
+/*
+console.log('---invocando inmediatamente funciones expresivas---');
+
+//en algunas ocasiones querremos o necesitaremos que una funcion se ejecute solo una vez y nunca mas
+
+const runOnce = function () {
+  console.log('esta funcion se ejecutara una vez y nunca mas');
+};
+//en este caso esta funcion podremos ejecutarla las veces que queramos
+runOnce();
+
+//pero hay un truco que podemos hacer para que javascript crea que en realidad la funcion es solo una expresion, en primera instanciia nos aparecera un error ya que javascript espera una 'function declaration' por la forma en que  la escribimos, pero es aca donde aparece el truco, debemos encerrar entre parentesis toda la funcion y luego llamarla, esto hare que javascript crea que es una funcion expresiva y se ejecute pero luego numca mas.
+(function () {
+  console.log('esta funcion se ejecutara una vez y nunca mas');
+})();
+
+//tambien podemos hacer lo mismo con las funcones flechas que son un tipo especial de funciones expresivas
+(() => console.log('esta funcion se ejecutara una vez y nunca mas'))();
+*/
+/*
+console.log('closures o cierres');
+//los cierres son uno de los temas mas incomprendidos de javascript, apesar de que los cierres ocurren de manera implicita, !nosotros no creamos cierres¡ es importante entenderlos y saber donde y porque ocurren. basicamente los cieeres traen consigo algunos temas y conceptos ya vistos anteriormente y los ejecuta todos de una vez de manera magica ,como (contexto de ejecusion, callstack, scopeChain).
+
+const secureBooking = function () {
+  let passengersCount = 0;
+
+  return function () {
+    passengersCount++;
+    console.log(`${passengersCount} passengers`);
+  };
+};
+
+//si observamos lo que acabamos de hacer es lo mismo que unas sesiones atras, tenemos una funcion que retorna otra funcion, luego la funcion retornada la almacenamos en esta variable booker, lo que hay que entender aca es que una vez llamada la funcion 'secureBooking' esta se va del callStack aun asi la funcion que ahora esta en ejecusion aun tiene acceso a la variable que esta dentro ¡esto no deveria de ser posible!, pero lo es gracias a los 'clouser'
+const booker = secureBooking();
+
+//basicamente los cierres permiten tener acceso a estas variables, pero no atravez del 'scopeChain' porque de hecho no es posible acceder a esta variable atravez de esta forma. //¿como entonces funcionan los clouser?
+//*simplemete cualquier funcion podra tener acceso a su entorno de variable en el contexto de ejecusion en donde se creo, aunque este ya no este presente en  el callstack. en otras ppalabras una funcion no pierde nunca la conexion con las variables que existian en el lugar de nacimiento de la funcion.
+//otras definisiones talvez mas intuitivas para definir un cierre son que grracias a este la cadena de alcanse(scope-cgain) se preserva entre la funcion padre y su hija.
+booker();
+booker();
+
+//esta es una caracteristica de las funciones la cual podemops ver a travez de la consola
+console.dir(booker);
+
+//a continuacion veremos algunos ejemplos mas para identificar cuando ocurre un cierre, y podamos verlo en nuestro propio codigo mas adelante.
+
+//ejemplo 1
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+console.dir(f);
+//Reasignamos la funcion F
+//podemos observar que a pesar de que ha sido reasignada la funcion f esta sigue teniendo acceso a la variable b, en otras palabras el cierre se produjo tanto para f como para f despues de a ver sido reasignada porque en si es una funcion diferente.
+h();
+f();
+console.dir(f); //lo podemos ver a travez de sus valores cada cierre tiene a su variable en este caso b
+
+//ejemplo 2, al igual que el primer ejemplo no es necesario tener una funcion que retorne otra funcion para ver un cierre.
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`we are now boarding all ${n} passengers`);
+    console.log(`there are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`will start boarding in ${wait} secons`);
+};
+
+//podemos apreciar que a pesar, de que al momento de ejecutarse la funcion SETTIME, la funcion passengers ya se a ido. aun asi esta sigue teniendo acceso a los argumentos y variables, esto se debe a que gracias al cierre esta funcion que fue creada en el contexto de la funcion boardPaseenger va a tener siempr acceso a estas variables.
+
+//ahora semostraremos que en realidad los cierres tiene prioridad sobre la cadena de alcance, y esto lo comprobamos creando esta variable en el entorno global. si no fuera prioridad seria esta la variable que usaria la funcion, pero vemos que no es asi
+//si quitaramos la variable perGroup claro que tomaria esta.
+const perGroup = 1000;
+boardPassengers(180, 3);
+*/
