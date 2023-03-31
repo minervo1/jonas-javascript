@@ -75,3 +75,90 @@ const calcAverageHumanAge1 = function (edades) {
   console.log(humanAge);
 };
 calcAverageHumanAge1(edades1);
+
+console.log('DESAFIO n° 4');
+//Julia y Kate todavía están estudiando perros, y esta vez están estudiando si los perros comen demasiado o comen poco. Comer demasiado significa que la porción de comida actual del perro es más grande que la porción recomendada, y comer muy poco es lo contrario.Comer una cantidad aceptable significa que la porción de comida actual del perro está dentro de un rango del 10 % por encima y 10% por debajo de la porción recomendada (ver sugerencia).
+
+//* DATOS-UTILES
+//Use muchas herramientas diferentes para resolver estos desafíos, puede usar el resumen conferencia para elegir entre ellos 😉
+//Estar dentro de un rango de 10% por encima y por debajo de la porción recomendada significa: actual > (recomendado * 0.90) && actual < (recomendado * 1.10). Básicamente, la porción actual debe estar entre el 90% y el 110% del porción recomendada.
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+//1. Recorra la matriz de 'perros' que contiene objetos de perro y, para cada perro, calcule la porción de comida recomendada y agréguela al objeto como una nueva propiedad. no cree una nueva matriz, simplemente recorra la matriz. Dato: Alimento recomendado = peso ** 0.75 * 28. (El resultado es en gramos de alimentos, y el peso debe estar en kg)
+dogs.forEach(function (ele) {
+  ele.porcionReco = Math.trunc(ele.weight ** 0.75 * 28);
+});
+
+console.log(dogs);
+//2. Encuentra el perro de Sarah e inicia sesión en la consola, ya sea que esté comiendo demasiado o demasiado poco. Sugerencia: algunos perros tienen varios dueños, por lo que primero debe encontrar a Sarah en la matriz de propietarios, por lo que este es un poco complicado (a propósito) 🤓
+const saraDog = dogs.find(function (perro) {
+  return perro.owners.includes('Sarah');
+});
+
+console.log(
+  `el perro  de sarah come ${
+    saraDog.curFood > saraDog.porcionReco ? 'mucho' : 'poco'
+  }`
+);
+
+//3. Cree una matriz que contenga todos los dueños de perros que comen demasiado ('propietarios comen demasiado') y una matriz con todos los propietarios de perros que comen muy poco ('los propietarios comen demasiado poco').
+
+const ownersEatMuch = dogs
+  .filter(function (ele) {
+    return ele.curFood > ele.porcionReco;
+  })
+  .map(function (ele) {
+    return ele.owners;
+  })
+  .flat();
+
+console.log(ownersEatMuch);
+
+//recordar que cuando tenemos arrays anidados podemos usar el metodo flat y si esta presente el metodo map, podemos reemplazar todo con 'flatMap'
+const ownersEatLi = dogs
+  .filter(function (ele) {
+    return ele.curFood < ele.porcionReco;
+  })
+  .flatMap(function (ele) {
+    return ele.owners;
+  });
+
+console.log(ownersEatLi);
+
+//4. Registre una cadena en la consola para cada matriz creada en 3., EJP: Los perros de matilda, Alice y Bob comen demasiado!" y "Los perros de Sarah, John y Michael comen ¡demasiado poco!".
+console.log(`los perros de ${ownersEatMuch.join(' y ')} comen mucho`);
+console.log(`los perros de ${ownersEatLi.join(' y ')} comen muy poco`);
+
+//5. Registre en la consola si hay algún perro comiendo exactamente la cantidad de comida que se recomienda (solo verdadero o falso)
+
+const mismaPorcion = dogs.some(function (ele) {
+  ele.curFood === ele.porcionReco;
+});
+console.log(mismaPorcion);
+//6. Registre en la consola si hay algún perro comiendo una cantidad adecuada de comida (simplemente verdadero o falso)
+const porcionAdecuada = dogs.some(function (ele) {
+  return (
+    ele.curFood > ele.porcionReco * 0.9 && ele.curFood < ele.porcionReco * 1.1
+  );
+});
+console.log(porcionAdecuada);
+
+//7. Cree una matriz que contenga los perros que comen una buena cantidad de comida (intente para reutilizar la condición utilizada en 6.)
+const buenaPorcionTodos = dogs.filter(function (ele) {
+  return (
+    ele.curFood > ele.porcionReco * 0.9 && ele.curFood < ele.porcionReco * 1.1
+  );
+});
+console.log(buenaPorcionTodos);
+//8. Cree una copia superficial de la matriz 'perros' y ordénela por comida recomendada porción en orden ascendente (tenga en cuenta que las porciones están dentro del objetos de la matriz 😉).
+const dogsCopy = dogs.slice().sort(function (a, b) {
+  //tenemos que recordar que estos parametros ahora son objetos y no solamente numeros
+  return a.porcionReco - b.porcionReco;
+});
+console.log(dogsCopy);
